@@ -1,3 +1,11 @@
-<p>
-  tutorial-list works!
-</p>
+<ul>
+  <div *ngFor="let tutorial of tutorialsObservable | async">
+      <ngb-alert type="info" [dismissible]="false">
+          <h3><a href="#">{{tutorial.title}}</a> </h3>
+          <p>{{tutorial.description}}</p>
+          <div>
+              <a href="{{tutorial.url}}" target="_blank" class="btn btn-danger">Idź do toturiala</a>
+          </div>
+      </ngb-alert>
+  </div>
+</ul>
