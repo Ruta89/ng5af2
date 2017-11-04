@@ -40,3 +40,7 @@ testem.log
 .DS_Store
 Thumbs.db
 src/environments/environment.ts
+yarn.lock
+yarn-error.log
+src/app/navbar/navbar.component.spec.ts
+src/app/tutorial-list/tutorial-list.component.spec.ts
