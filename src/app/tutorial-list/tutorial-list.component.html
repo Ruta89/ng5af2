@@ -1,11 +1,55 @@
-<ul>
-  <div *ngFor="let tutorial of tutorialsObservable | async">
-      <ngb-alert type="info" [dismissible]="false">
-          <h3><a href="#">{{tutorial.title}}</a> </h3>
-          <p>{{tutorial.description}}</p>
-          <div>
-              <a href="{{tutorial.url}}" target="_blank" class="btn btn-danger">Idź do tutoriala</a>
-          </div>
-      </ngb-alert>
+<div *ngIf="show == 'addForm'">
+  <app-tutorial-add></app-tutorial-add>
+</div>
+
+<div *ngIf="show == 'formUpdate'">
+
+  <form [formGroup]="formUpdate" (ngSubmit)="updateTutorial(formUpdate.value);">
+    <div class="form-group">
+      <label class="center-block">Tytuł:
+        <input type="text" class="form-control" formControlName="title" required>
+      </label>
+
+      <label class="center-block">Opis:
+        <input type="text" class="form-control" formControlName="description" required>
+      </label>
+
+      <label class="center-block">Adres url:
+        <input type="url" class="form-control" formControlName="url" required>
+      </label>
+    </div>
+  </form>
+  <button class="btn btn-primary" [disabled]="!formUpdate.valid" (click)="updateTutorial(formUpdate.value)">Zaktualizuj</button>
+
+</div>
+
+<div *ngIf="show == 'showList'">
+  <div *ngIf="showButton == 'addButton'">
+    <button class="btn btn-primary" (click)="addForm()">Dodaj</button>
   </div>
-</ul>
+  <ul>
+    <div *ngFor="let tutorial of tutorialsObservable | async">
+      <ngb-alert type="info" [dismissible]="false">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h3>
+                <a href="{{tutorial.url}}">{{tutorial.title}}</a>
+              </h3>
+              <p>{{tutorial.description}}</p>
+              <div>
+                <a href="{{tutorial.url}}" target="_blank" class="btn btn-danger">Idź do tutoriala</a>
+              </div>
+            </div>
+            <div class="col-1">
+              <button class="btn btn-outline-danger btn-sm" (click)="deleteTutorial(tutorial.key)"> Usuń</button>
+              <button class="btn btn-outline-primary btn-sm" (click)="updateBtn(tutorial)"> Edytuj</button>
+            </div>
+          </div>
+
+        </div>
+      </ngb-alert>
+    </div>
+  </ul>
+
+</div>

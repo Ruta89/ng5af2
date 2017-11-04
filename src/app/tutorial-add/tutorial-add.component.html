@@ -1,0 +1,18 @@
+<p>Dodaj tutorial</p>
+
+<form [formGroup]="formAdd" (ngSubmit)="saveTutorial(formAdd.value);">
+  <div class="form-group">
+    <label class="center-block">Tytuł:
+      <input type="text" class="form-control" formControlName="title" required>
+    </label>
+
+    <label class="center-block">Opis:
+      <input type="text" class="form-control" formControlName="description" required>
+    </label>
+
+    <label class="center-block">Adres url:
+      <input type="url" class="form-control" formControlName="url" required>
+    </label>
+  </div>
+</form>
+<button class="btn btn-primary" [disabled]="!formAdd.valid" (click)="saveTutorial(formAdd.value)">Zapisz</button>
